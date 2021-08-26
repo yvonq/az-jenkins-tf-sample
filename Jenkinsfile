@@ -8,7 +8,7 @@ pipeline {
         stage('Terraform Plan') {
 		agent {
         docker {
-		        image 'hashicorp/terraform:0.12.31' 
+		        image 'hashicorp/terraform:light' 
 		        args '--entrypoint='
 				}
 		}
