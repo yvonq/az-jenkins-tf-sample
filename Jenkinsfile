@@ -7,7 +7,10 @@ pipeline {
     stages {
         stage('Terraform Plan') {
 		agent {
-        docker {image 'hashicorp/terraform:0.12.31'}
+        docker {
+		        image 'hashicorp/terraform:0.12.31' 
+		        args '--entrypoint='
+				}
 		}
 			when {
                 branch 'main'
@@ -31,7 +34,10 @@ pipeline {
         }
         stage('Terraform Apply') {
 		agent {
-        docker {image 'hashicorp/terraform:0.12.31'}
+        docker {
+		        image 'hashicorp/terraform:0.12.31' 
+		        args '--entrypoint='
+				}
 		}
             when {
                 branch 'release'
