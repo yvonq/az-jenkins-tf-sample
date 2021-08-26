@@ -7,6 +7,9 @@ pipeline {
 
     stages {
         stage('Terraform Plan') {
+			when {
+                branch 'main'
+            }
             steps {
                 withCredentials([
                     azureServicePrincipal(
