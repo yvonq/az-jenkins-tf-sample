@@ -24,7 +24,8 @@ pipeline {
                   string(credentialsId: 'terraform-svc', variable: 'access_key')
                 ])
                 {
-                    sh 'sh scripts/terraform.sh plan'
+                    sh 'terraform init'
+                    sh 'terraform plan'
                 }
             }
         }
@@ -47,7 +48,8 @@ pipeline {
                   string(credentialsId: 'terraform-svc', variable: 'access_key')
                 ])
                 {
-                    sh 'sh scripts/terraform.sh apply'
+                    sh 'terraform init'
+                    sh 'terraform apply'
                 }
             }
         }
