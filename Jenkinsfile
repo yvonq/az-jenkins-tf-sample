@@ -12,9 +12,7 @@ pipeline {
 		        args '--entrypoint='
 				}
 		}
-			when {
-                branch 'main'
-            }
+			
             steps {
                 withCredentials([
                     azureServicePrincipal(
