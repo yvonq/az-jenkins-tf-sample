@@ -8,11 +8,14 @@ pipeline {
         stage('Terraform Plan') {
 		agent {
         docker {
-		        image 'hashicorp/terraform:light' 
-		        args '--entrypoint=\'\''
+		        image 'hashicorp/terraform:latest'
+                label 'LINUX-SLAVE'
+                args  '--entrypoint=""'
 				}
 		}
-			
+			options {
+        ansiColor('xterm')
+    }
             steps {
                 withCredentials([
                     azureServicePrincipal(
@@ -25,8 +28,8 @@ pipeline {
                   string(credentialsId: 'terraform-svc', variable: 'access_key')
                 ])
                 {
+                    sh 'terraform version'
                     sh 'terraform init'
-                    sh 'terraform plan'
                 }
             }
         }
