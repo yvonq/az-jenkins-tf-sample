@@ -1,12 +1,14 @@
 pipeline {
-    agent {
-        docker {
-            image 'hashicorp/terraform:0.12.31'
-        }
+    agent none
+    options {
+        disableConcurrentBuilds()
     }
 
     stages {
         stage('Terraform Plan') {
+		agent {
+        docker {image 'hashicorp/terraform:0.12.31'}
+		}
 			when {
                 branch 'main'
             }
@@ -27,6 +29,9 @@ pipeline {
             }
         }
         stage('Terraform Apply') {
+		agent {
+        docker {image 'hashicorp/terraform:0.12.31'}
+		}
             when {
                 branch 'release'
             }
