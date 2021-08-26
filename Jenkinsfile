@@ -13,9 +13,7 @@ pipeline {
                 args  '--entrypoint=""'
 				}
 		}
-			options {
-        ansiColor('xterm')
-    }
+			
             steps {
                 withCredentials([
                     azureServicePrincipal(
