@@ -9,7 +9,7 @@ pipeline {
 		agent {
         docker {
 		        image 'hashicorp/terraform:latest'
-                label 'LINUX-SLAVE'
+                
                 args  '--entrypoint=""'
 				}
 		}
