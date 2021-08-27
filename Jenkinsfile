@@ -96,7 +96,7 @@ pipeline {
 							}
 					 }
 				}
-#####
+
 		stage('Waiting for Ok to destroy minutes Max'){
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
