@@ -1,19 +1,16 @@
 pipeline {
-    agent none
+    agent {
+        docker {
+            image 'hashicorp/terraform:latest'
+            args  '--entrypoint=""'
+        }
+    }
     options {
         disableConcurrentBuilds()
     }
 
     stages {
         stage('Terraform Plan') {
-		agent {
-        docker {
-		        image 'hashicorp/terraform:latest'
-                
-                args  '--entrypoint=""'
-				}
-		}
-			
             steps {
                 withCredentials([
                     azureServicePrincipal(
@@ -49,8 +46,7 @@ pipeline {
                         clientIdVariable:       'ARM_CLIENT_ID',
                         clientSecretVariable:   'ARM_CLIENT_SECRET',
                         tenantIdVariable:       'ARM_TENANT_ID'
-                    ),
-                  string(credentialsId: 'terraform-svc', variable: 'access_key')
+                    )
                 ])
                 {
                     sh 'terraform init'
