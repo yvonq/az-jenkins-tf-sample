@@ -32,16 +32,9 @@ pipeline {
              }
         }
         stage('Terraform Apply') {
-		agent {
-        docker {
-		        image 'hashicorp/terraform:0.12.31' 
-		        args '--entrypoint='
-				}
-		}
+		
             when {
-				expression {
-					return env.BRANCH_NAME == 'release';
-				}
+				 expression {env.GIT_BRANCH == 'origin/release'}
 			}
             steps {
                 withCredentials([
