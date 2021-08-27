@@ -8,7 +8,6 @@ pipeline {
     options {
         disableConcurrentBuilds()
     }
-
     stages {
      stage('Terraform Init'){
             
