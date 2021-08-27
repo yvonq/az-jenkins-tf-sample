@@ -5,13 +5,22 @@ terraform {
     container_name       = "tfstate"
     key                  = "terraform.tfstate"
   }
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version         =   "~> 2.0"
+    }
+	azuread = {
+      source  = "hashicorp/azuread"
+      version         =   ">= 0.11"
+    }
+  }
 
 }
 
 # Provider Block
 
 provider "azurerm" {
-    version         =   "~> 2.0"
     
     features {}
 }
@@ -20,7 +29,6 @@ provider "azurerm" {
 
 
 provider "azuread" {
-    version         =   ">= 0.11"
     
     alias           =   "ad"
 }
