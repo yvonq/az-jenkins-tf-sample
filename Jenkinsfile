@@ -1,16 +1,16 @@
 pipeline {
-    agent {
-        docker {
-            image 'hashicorp/terraform:latest'
-            args  '--entrypoint=""'
-        }
-    }
+    agent none
     options {
         disableConcurrentBuilds()
     }
     stages {
      stage('Terraform Init'){
-            
+            agent {
+				docker {
+					image 'hashicorp/terraform:latest'
+					args  '--entrypoint=""'
+				}
+			}
             steps {
                     ansiColor('xterm') {
                     withCredentials([azureServicePrincipal(
@@ -32,7 +32,12 @@ pipeline {
              }
         }
         stage('Terraform Apply') {
-		
+			agent {
+				docker {
+					image 'hashicorp/terraform:latest'
+					args  '--entrypoint=""'
+				}
+			}
             when {
 				 expression {env.GIT_BRANCH == 'origin/release'}
 			}
