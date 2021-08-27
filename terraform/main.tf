@@ -6,14 +6,12 @@ terraform {
     key                  = "terraform.tfstate"
   }
 
-  required_version = ">= 0.12"
 }
 
 # Provider Block
 
 provider "azurerm" {
     version         =   "~> 2.0"
-    
     
     features {}
 }
