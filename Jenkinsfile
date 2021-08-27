@@ -40,8 +40,10 @@ pipeline {
 				}
 		}
             when {
-                branch 'release'
-            }
+				expression {
+					return env.BRANCH_NAME == 'release';
+				}
+			}
             steps {
                 withCredentials([
                     azureServicePrincipal(
